@@ -111,18 +111,21 @@ html,body{min-height:100vh;font-family:var(--font);background:var(--sf-white);co
 <script>
 (function(){
 var TOTAL=46;
-function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):''}
+function safe(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):''}
 function openSlide(i){var h=DATA[i].slide_html;if(!h){alert('Slide not available');return;}window.open(URL.createObjectURL(new Blob([h],{type:'text/html'})),'_blank');}
 window.openSlide=openSlide;
 function card(item,i){
-var chips=(item.chips||[]).map(function(c){return'<span class="chip">'+esc(c)+'</span>';}).join('');
-var bullets=(item.bullets||[]).map(function(b){return'<li>'+esc(b)+'</li>';}).join('');
-var outcomes=(item.outcomes||[]).map(function(o){return'<div class="outcome-row">&middot; '+esc(o)+'</div>';}).join('');
-var repoUrl='https://github.com/sfc-gh-michael-lemke/'+item.repo;
-var srch=((item.project_name||'')+' '+(item.tagline||'')+' '+((item.chips||[]).join(' '))+' '+((item.outcomes||[]).join(' '))+' '+((item.bullets||[]).join(' '))).toLowerCase();
-return'<div class="card" data-persona="'+esc(item.persona)+'" data-search="'+esc(srch)+'">'
-+'<div class="card-header"><div class="card-title">'+esc(item.project_name||item.repo)+'</div><span class="persona-badge">'+esc(item.persona)+'</span></div>'
-+(item.tagline?'<div class="tagline">'+esc(item.tagline)+'</div>':'')
+// item text fields already contain HTML entities from the source slides - use as-is for innerHTML
+var chips=(item.chips||[]).map(function(c){return'<span class="chip">'+c+'</span>';}).join('');
+var bullets=(item.bullets||[]).map(function(b){return'<li>'+b+'</li>';}).join('');
+var outcomes=(item.outcomes||[]).map(function(o){return'<div class="outcome-row">&middot; '+o+'</div>';}).join('');
+var repoUrl='https://github.com/sfc-gh-michael-lemke/'+safe(item.repo);
+// Build search index from plain text (decode entities for searching)
+var raw=function(s){var t=document.createElement('div');t.innerHTML=s;return t.textContent||'';}
+var srch=(raw(item.project_name||'')+' '+raw(item.tagline||'')+' '+raw((item.chips||[]).join(' '))+' '+raw((item.outcomes||[]).join(' '))+' '+raw((item.bullets||[]).join(' '))).toLowerCase();
+return'<div class="card" data-persona="'+safe(item.persona)+'" data-search="'+safe(srch)+'">'
++'<div class="card-header"><div class="card-title">'+(item.project_name||safe(item.repo))+'</div><span class="persona-badge">'+safe(item.persona)+'</span></div>'
++(item.tagline?'<div class="tagline">'+item.tagline+'</div>':'')
 +(chips?'<div><div class="section-label">Capabilities</div><div class="chips">'+chips+'</div></div>':'')
 +(bullets?'<div><div class="section-label">Challenge</div><ul class="bullets">'+bullets+'</ul></div>':'')
 +(outcomes?'<div><div class="section-label">Outcomes</div><div class="outcomes-list">'+outcomes+'</div></div>':'')
