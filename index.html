@@ -94,6 +94,25 @@ html, body { font-family: var(--font); background: var(--sf-white); color: var(-
 .footer-links { display: flex; gap: 20px; }
 .footer-link { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.15s; }
 .footer-link:hover { color: var(--sf-blue); }
+
+  /* ── Contribute section ── */
+  .contribute-bg { background: #F5F5F5; }
+  .skill-card { background: #FFFFFF; border: 1.5px solid #29B5E8; border-radius: 12px; padding: 28px 32px; margin-top: 32px; }
+  .skill-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+  .skill-icon { width: 44px; height: 44px; background: rgba(41,181,232,0.12); border: 1px solid rgba(41,181,232,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .skill-meta { flex: 1; }
+  .skill-name { font-size: 18px; font-weight: 700; color: #262626; margin-bottom: 2px; }
+  .skill-tag { display: inline-flex; background: rgba(41,181,232,0.10); border: 1px solid rgba(41,181,232,0.25); border-radius: 20px; padding: 2px 12px; font-size: 10px; font-weight: 700; color: #29B5E8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .skill-desc { font-size: 14px; color: #5B5B5B; line-height: 1.6; margin-bottom: 20px; }
+  .code-block { background: #0A1628; border: 1px solid rgba(41,181,232,0.2); border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 13px; color: #29B5E8; overflow-x: auto; margin-bottom: 8px; }
+  .code-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #919191; margin-bottom: 6px; }
+  .skill-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .contribute-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 32px; }
+  .contribute-step { background: #FFFFFF; border: 1px solid #C8C8C8; border-radius: 10px; padding: 20px; }
+  .contribute-step-num { width: 28px; height: 28px; border-radius: 50%; background: #29B5E8; color: #FFFFFF; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .contribute-step h4 { font-size: 13px; font-weight: 700; color: #262626; margin-bottom: 4px; }
+  .contribute-step p { font-size: 12px; color: #5B5B5B; line-height: 1.5; }
+
 </style>
 </head>
 <body>
@@ -213,6 +232,64 @@ html, body { font-family: var(--font); background: var(--sf-white); color: var(-
     </div>
   </div>
 </div>
+
+
+<!-- Contribute Section -->
+<div class="section-full contribute-bg">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-eyebrow">Contributing</div>
+    <div class="section-title">Add your solution to the Hub</div>
+    <p class="section-sub">The catalog grows through team contributions. If you have a Snowflake solution, tool, or workflow documented in a GitHub repo, the <strong>value-realization-slide</strong> CoCo skill generates a branded slide for it in seconds.</p>
+
+    <!-- Skill card -->
+    <div class="skill-card">
+      <div class="skill-header">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-meta">
+          <div class="skill-name">value-realization-slide</div>
+          <span class="skill-tag">CoCo Skill</span>
+        </div>
+      </div>
+      <p class="skill-desc">A Cortex Code skill that reads any GitHub repo's documentation, analyzes the challenge/capabilities/outcomes, and produces a pixel-perfect Snowflake 2026-branded HTML slide — ready to commit and share. No template editing required.</p>
+
+      <div class="code-label">Install in CoCo</div>
+      <div class="code-block">Install plugin from GitHub: https://github.com/sfc-gh-michael-lemke/value-realization-slide</div>
+
+      <div class="code-label">Run against your repo</div>
+      <div class="code-block">/value-realization-slide https://github.com/your-org/your-repo</div>
+
+      <div class="skill-links">
+        <a class="btn btn-primary" href="https://github.com/sfc-gh-michael-lemke/value-realization-slide" target="_blank" style="font-size:12px;padding:8px 18px;">View Skill on GitHub →</a>
+        <a class="btn btn-outline" href="https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code" target="_blank" style="font-size:12px;padding:8px 18px;color:#262626;border-color:#C8C8C8;">Get CoCo</a>
+      </div>
+    </div>
+
+    <!-- 4-step contribution process -->
+    <div class="contribute-steps">
+      <div class="contribute-step">
+        <div class="contribute-step-num">1</div>
+        <h4>Install the Skill</h4>
+        <p>In CoCo, paste the install command above. The skill is ready in seconds — no configuration needed.</p>
+      </div>
+      <div class="contribute-step">
+        <div class="contribute-step-num">2</div>
+        <h4>Run Against Your Repo</h4>
+        <p>Type <code>/value-realization-slide</code> and your GitHub repo URL. The skill fetches your README and generates the branded slide.</p>
+      </div>
+      <div class="contribute-step">
+        <div class="contribute-step-num">3</div>
+        <h4>Commit the Slide</h4>
+        <p>The slide is saved to <code>~/Downloads</code>. Commit it to your repo root as <code>value-realization.html</code>.</p>
+      </div>
+      <div class="contribute-step">
+        <div class="contribute-step-num">4</div>
+        <h4>Submit to the Hub</h4>
+        <p>Use the feedback form below with your repo URL to request it be added to the catalog. We review and publish within a few days.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
 
 <!-- Feedback CTA -->
 <div class="section-full feedback-bg">
