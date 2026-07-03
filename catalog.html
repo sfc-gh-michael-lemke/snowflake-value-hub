@@ -48,6 +48,10 @@ html,body{min-height:100vh;font-family:var(--font);background:var(--sf-white);co
 .bullets li::before{content:'\25B8';color:var(--sf-blue);font-size:9px;flex-shrink:0;margin-top:2px}
 .outcomes-list{display:flex;flex-direction:column;gap:5px}
 .outcome-row{font-size:11px;color:var(--sf-body);font-weight:600}
+.section-subtitle{font-size:10px;color:var(--sf-secondary);line-height:1.4;margin:-2px 0 6px;font-style:italic}
+.next-steps-list{display:flex;flex-direction:column;gap:5px}
+.next-step{font-size:11px;color:var(--sf-secondary);line-height:1.4;display:flex;gap:6px}
+.next-step::before{content:'\2192';color:var(--sf-blue);font-size:11px;flex-shrink:0}
 .card-footer{display:flex;gap:10px;margin-top:2px}
 .card-link{font-size:11px;font-weight:600;color:var(--sf-blue);text-decoration:none;border:1px solid rgba(41,181,232,.3);border-radius:6px;padding:5px 12px;transition:background .15s;cursor:pointer;background:none;font-family:var(--font)}
 .card-link:hover{background:rgba(41,181,232,.08)}
@@ -121,14 +125,15 @@ var chips=(item.chips||[]).map(function(c){return'<span class="chip">'+esc(c)+'<
 var bullets=(item.bullets||[]).map(function(b){return'<li>'+esc(b)+'</li>';}).join('');
 var outcomes=(item.outcomes||[]).map(function(o){return'<div class="outcome-row">&middot; '+esc(o)+'</div>';}).join('');
 var repoUrl='https://github.com/sfc-gh-michael-lemke/'+esc(item.repo);
-var srch=((item.project_name||'')+' '+(item.tagline||'')+' '+(item.summary||'')+' '+((item.chips||[]).join(' '))+' '+((item.outcomes||[]).join(' '))+' '+((item.bullets||[]).join(' '))).toLowerCase();
+var srch=((item.project_name||'')+' '+(item.tagline||'')+' '+(item.summary||'')+' '+((item.chips||[]).join(' '))+' '+((item.outcomes||[]).join(' '))+' '+((item.bullets||[]).join(' '))+' '+((item.next_steps||[]).join(' '))).toLowerCase();
 return'<div class="card" data-persona="'+esc(item.persona)+'" data-search="'+esc(srch)+'">'
 +'<div class="card-header"><div class="card-title">'+esc(item.project_name||item.repo)+'</div><span class="persona-badge">'+esc(item.persona)+'</span></div>'
 +(item.tagline?'<div class="tagline">'+esc(item.tagline)+'</div>':'')
 +(item.summary?'<div class="summary">'+esc(item.summary)+'</div>':'')
-+(chips?'<div><div class="section-label">Capabilities</div><div class="chips">'+chips+'</div></div>':'')
-+(bullets?'<div><div class="section-label">Challenge</div><ul class="bullets">'+bullets+'</ul></div>':'')
-+(outcomes?'<div><div class="section-label">Outcomes</div><div class="outcomes-list">'+outcomes+'</div></div>':'')
++(chips?'<div><div class="section-label">Capabilities</div>'+(item.capability_heading?'<div class="section-subtitle">'+esc(item.capability_heading)+'</div>':'')+'<div class="chips">'+chips+'</div></div>':'')
++(bullets?'<div><div class="section-label">Challenge</div>'+(item.challenge_heading?'<div class="section-subtitle">'+esc(item.challenge_heading)+'</div>':'')+'<ul class="bullets">'+bullets+'</ul></div>':'')
++(outcomes?'<div><div class="section-label">Outcomes</div>'+(item.outcome_heading?'<div class="section-subtitle">'+esc(item.outcome_heading)+'</div>':'')+'<div class="outcomes-list">'+outcomes+'</div></div>':'')
++(item.next_steps&&item.next_steps.length?'<div><div class="section-label">Getting Started</div><div class="next-steps-list">'+item.next_steps.map(function(s){return'<div class="next-step">'+esc(s)+'</div>';}).join('')+'</div></div>':'')
 +'<div class="card-footer"><button class="card-link" onclick="openSlide('+i+')">View Slide &rarr;</button>'
 +'<a class="card-link secondary" href="'+repoUrl+'" target="_blank">Repo</a></div></div>';
 }
