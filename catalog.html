@@ -39,6 +39,7 @@ html,body{min-height:100vh;font-family:var(--font);background:var(--sf-white);co
 .card-title{font-size:14px;font-weight:700;color:var(--sf-body);line-height:1.3}
 .persona-badge{background:rgba(41,181,232,.08);border:1px solid rgba(41,181,232,.25);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:var(--sf-blue);white-space:nowrap;flex-shrink:0;letter-spacing:.04em;text-transform:uppercase}
 .tagline{font-size:12px;color:var(--sf-secondary);line-height:1.5}
+.summary{font-size:11px;color:var(--sf-secondary);line-height:1.6;border-left:2px solid rgba(41,181,232,.25);padding-left:10px}
 .section-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(41,181,232,.8);margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{background:rgba(41,181,232,.07);border:1px solid rgba(41,181,232,.2);border-radius:5px;padding:3px 9px;font-size:10px;font-weight:600;color:var(--sf-blue)}
@@ -120,10 +121,11 @@ var chips=(item.chips||[]).map(function(c){return'<span class="chip">'+esc(c)+'<
 var bullets=(item.bullets||[]).map(function(b){return'<li>'+esc(b)+'</li>';}).join('');
 var outcomes=(item.outcomes||[]).map(function(o){return'<div class="outcome-row">&middot; '+esc(o)+'</div>';}).join('');
 var repoUrl='https://github.com/sfc-gh-michael-lemke/'+esc(item.repo);
-var srch=((item.project_name||'')+' '+(item.tagline||'')+' '+((item.chips||[]).join(' '))+' '+((item.outcomes||[]).join(' '))+' '+((item.bullets||[]).join(' '))).toLowerCase();
+var srch=((item.project_name||'')+' '+(item.tagline||'')+' '+(item.summary||'')+' '+((item.chips||[]).join(' '))+' '+((item.outcomes||[]).join(' '))+' '+((item.bullets||[]).join(' '))).toLowerCase();
 return'<div class="card" data-persona="'+esc(item.persona)+'" data-search="'+esc(srch)+'">'
 +'<div class="card-header"><div class="card-title">'+esc(item.project_name||item.repo)+'</div><span class="persona-badge">'+esc(item.persona)+'</span></div>'
 +(item.tagline?'<div class="tagline">'+esc(item.tagline)+'</div>':'')
++(item.summary?'<div class="summary">'+esc(item.summary)+'</div>':'')
 +(chips?'<div><div class="section-label">Capabilities</div><div class="chips">'+chips+'</div></div>':'')
 +(bullets?'<div><div class="section-label">Challenge</div><ul class="bullets">'+bullets+'</ul></div>':'')
 +(outcomes?'<div><div class="section-label">Outcomes</div><div class="outcomes-list">'+outcomes+'</div></div>':'')
